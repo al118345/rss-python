@@ -2,18 +2,27 @@
 
 from feedgen.feed import FeedGenerator
 import pandas as pd
+#parametros a rellenar
+nombre_autor = "1938.com.es"
+email=  "1938web@gmail.com"
+titulo=  "Web 1938.com.es"
+logo= "https://1938.com.es/assets/imagenes/logo.png " #opcional
+url = "https://1938.com.es/";
+descripcion ="Videos sobre la información de interes sobre el diseño de aplicaciones moviles, ciencia de datos (BigData) y tecnologías de la información"
+
 fg = FeedGenerator()
 fg.id(1)
-fg.title("1938.com.es")
+fg.title(titulo)
 fg.author(
-    {"name": "1938.com.es", "email": "1938web@gmail.com"}
+    {"name": nombre_autor, "email": email}
 )
-fg.logo("https://1938.com.es/assets/imagenes/logo.png")
-fg.link(href="https://1938.com.es/", rel="self")
+fg.logo(logo)
+fg.link(href=url, rel="self")
 fg.language("es")
-fg.description("Videos sobre la información de interes sobre el diseño de aplicaciones moviles, ciencia de datos (BigData) y tecnologías de la información")
-df = pd.read_csv('rss.csv', sep=';' ,header=0)
+fg.description(descripcion)
 
+nombre_fichero ="rss.csv"
+df = pd.read_csv(nombre_fichero, sep=';' ,header=0)
 for index, row in df.iterrows():
     fe = fg.add_entry(order="append")
     fe.id(row['url'])
